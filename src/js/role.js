@@ -1,7 +1,5 @@
 var pl = new CreatePlayer(0, 'NULL', 'NULL', 0, 0, 0, 0, 0)
 var el = new CreatePlayer(0, 'NULL', 'NULL', 0, 0, 0, 0, 0)
-window.console.log(pl)
-window.console.log(el)
 import role_data from './data/role.json'
 var RoleData = role_data
 
@@ -27,9 +25,10 @@ function UpdateRole(obj, uid) {
     for (let index in obj) {
         obj[index] = datamsg[index]
     }
-    window.console.log(obj)
 }
 
 export default {
-    pl, el, UpdateRole
+    pl,
+    el,
+    UpdateRole
 }

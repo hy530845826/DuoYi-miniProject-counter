@@ -9,6 +9,7 @@
             <option value="1">龙宫</option>
             <option value="2">方寸</option>
             <option value="3">佛门</option>
+            <option value="4">攻宠</option>
           </select>
         </h1>
 
@@ -49,6 +50,7 @@
             <option value="1">龙宫</option>
             <option value="2">方寸</option>
             <option value="3">佛门</option>
+            <option value="4">攻宠</option>
           </select>
         </h1>
         <div id="role">
@@ -82,7 +84,6 @@
       </div>
     </div>
 
-    <button @click="check">点击</button>
     <div id="huang">
       <table>
         <tr>
@@ -96,15 +97,15 @@
           <th>DEBUFF</th>
           <th class="yao"></th>
           <th>本次伤害</th>
-          <th>目标防御</th>
+          <th>目标防御/法抗</th>
           <th>最终伤害</th>
         </tr>
         <tr>
           <td>物理攻击</td>
           <td class="c_skill">
-            <select class="select_skill">
-              <option value="skill_1">开天辟地</option>
-              <option value="skill_2">先发制人</option>
+            <select id="select_skill_wuli">
+              <option value="0">开天辟地</option>
+              <option value="1">先发制人</option>
             </select>
           </td>
           <td></td>
@@ -112,19 +113,48 @@
           <td class="i_buff">
             +
             <input type="text" v-model="i_buff" />
-            攻
+            攻击
           </td>
           <td></td>
           <td class="t_role">{{t_roledata[0]}}</td>
           <td class="t_debuff">
             -
             <input type="text" v-model="t_debuff" />
-            防
+            防御
           </td>
           <td></td>
-          <td class="i_atk">{{i_fatk}}</td>
-          <td class="t_def">{{t_def}}</td>
-          <td class="f_damage">{{damage}}</td>
+          <td class="i_atk">{{counter[3]}}</td>
+          <td class="t_def">{{counter[0]}} 防御</td>
+          <td class="f_damage">{{damage_wuli}}</td>
+        </tr>
+        <tr>
+          <td>法术攻击</td>
+          <td class="c_skill">
+            <select id="select_skill_mofa">
+              <option value="0">升龙</option>
+              <option value="1">双龙戏珠</option>
+              <option value="1">呼风唤雨</option>
+            </select>
+          </td>
+          <td></td>
+          <td class="i_role">{{i_roledata[0]}}</td>
+          <td class="i_buff">
+            <!-- +
+            <input type="text" v-model="i_buff" />
+            法强 -->
+            (法术为固定伤害)
+          </td>
+          <td></td>
+          <td class="t_role">{{t_roledata[0]}}</td>
+          <td class="t_debuff">
+            -
+            <input type="text" v-model="t_debuff" />
+            法抗
+          </td>
+          <td></td>
+          <td class="i_atk">{{counter[4]}}</td>
+          <td class="t_def">{{counter[1]}} 法抗</td>
+          <td class="f_damage">{{damage_mofa}}</td>
         </tr>
       </table>
     </div>
@@ -133,6 +163,7 @@
 
 <script>
 import RoleData from "./js/role";
+import SkillData from "./js/skill";
 
 export default {
   name: "App",
@@ -154,27 +185,33 @@ export default {
         RoleData.el.ADF,
         RoleData.el.SPD,
       ],
+      counter: [
+        0, //目标最终防御
+        0, //目标最终法抗
+        0, //角色当前物理攻击
+        0, //角色最终物理攻击
+        0, //角色当前法术攻击
+      ],
       i_Flag: -1,
       t_Flag: -1,
       i_buff: 0,
       t_debuff: 0,
-      i_skill_x: 1,
-      i_atk: 0,
-      i_fatk: 0,
-      t_def: 0,
+      i_skill_wuli_x: SkillData.wlsk.X,
+      i_skill_mofa_x: SkillData.mfsk.X,
+      s_Flag: -1,
+      damage_wuli: 0,
+      damage_mofa: 0,
     };
   },
   components: {},
   methods: {
-    check: function () {
-      // var skillID = $("#huang .c_skill select")[0].value;
-      // var skillIDNum = parseInt(skillID.replace(/[^0-9]/gi, ""));
-      // window.console.log(skillID);
-      // window.console.log(skillIDNum);
+    check_1: function () {
       var that = this;
       setInterval(function () {
         var a = $("#select_i_role")[0].value;
         var b = $("#select_t_role")[0].value;
+        var wlsk_num = $("#select_skill_wuli")[0].value;
+        var mfsk_num = $("#select_skill_mofa")[0].value;
         // var buff = parseInt($("#huang .i_buff input")[0].value);
         // var debuff = parseInt($("#huang .t_debuff input")[0].value);
 
@@ -188,11 +225,13 @@ export default {
           RoleData.UpdateRole(RoleData.el, b);
           that.el_F5(that);
         }
-        that.i_atk = that.i_roledata[2] + parseInt(that.i_buff);
-        that.t_def = that.t_roledata[3] - parseInt(that.t_debuff);
-        that.i_fatk = parseInt(that.i_atk * that.i_skill_x);
-        that.damage = that.i_fatk - that.t_def;
-      }, 500);
+        SkillData.UpdateSkill(SkillData.wlsk, wlsk_num);
+        SkillData.UpdateSkill(SkillData.mfsk, mfsk_num);
+        that.skill_F5(that);
+        that.damage_wuli = that.counter[3] - that.counter[0];
+        that.damage_mofa = that.counter[4] - that.counter[1];
+        // window.console.log(that.counter);
+      }, 100);
     },
     pl_F5: function (that) {
       that.$set(that.i_roledata, 0, RoleData.pl.cname);
@@ -210,9 +249,21 @@ export default {
       that.$set(that.t_roledata, 4, RoleData.el.ADF);
       that.$set(that.t_roledata, 5, RoleData.el.SPD);
     },
+    skill_F5: function (that) {
+      that.$set(that.counter, 0, that.t_roledata[3] - parseInt(that.t_debuff));
+      that.$set(that.counter, 1, that.t_roledata[4] - parseInt(that.t_debuff));
+      that.$set(that.counter, 2, that.i_roledata[2] + parseInt(that.i_buff));
+      that.$set(
+        that.counter,
+        3,
+        parseInt(that.counter[2] * that.i_skill_wuli_x)
+      );
+      that.$set(that.counter, 4, SkillData.mfsk.X);
+      that.i_skill_wuli_x = SkillData.wlsk.X;
+    },
   },
   mounted() {
-    this.check();
+    this.check_1();
   },
 };
 </script>
