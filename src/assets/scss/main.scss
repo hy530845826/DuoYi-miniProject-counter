@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+    color: #333;
+    list-style: none;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", Tahoma, Arial, sans-serif;
+}
+
+body {
+    background: #bbb;
+}
+
+#app {
+    width: 1200px;
+    margin: 100px auto;
+    border: 2px solid #333;
+    background: #eee;
+}
+
+img {
+    border: 0;
+}
+
+#rolebox {
+    height: 300px;
+}
+
+.cardbox {
+    overflow: hidden;
+    margin: 20px;
+}
+
+#i_rolebox {
+    float: left;
+}
+
+#t_rolebox {
+    float: right;
+}
+
+.cardbox ul li {
+    padding-bottom: 3px;
+    background-color: #ace;
+    overflow: hidden;
+    text-align: left;
+    line-height: 28px;
+    width: 200px;
+}
+
+.cardbox ul li b {
+    padding-left: 40px;
+}
+
+.cardbox ul li span {
+    padding-left: 10px;
+}
+
+.cardbox ul li .cname {
+    font-weight: bold;
+    color: red;
+}
