@@ -133,7 +133,7 @@
             <select id="select_skill_mofa">
               <option value="0">升龙</option>
               <option value="1">双龙戏珠</option>
-              <option value="1">呼风唤雨</option>
+              <option value="2">呼风唤雨</option>
             </select>
           </td>
           <td></td>
@@ -141,7 +141,7 @@
           <td class="i_buff">
             <!-- +
             <input type="text" v-model="i_buff" />
-            法强 -->
+            法强-->
             (法术为固定伤害)
           </td>
           <td></td>
@@ -219,11 +219,17 @@ export default {
           that.i_Flag = a;
           RoleData.UpdateRole(RoleData.pl, a);
           that.pl_F5(that);
+          // $("#i_rolebox").css(
+          //   "background-image",
+          //   "url(./assets/images/" + a + ".png)"
+          // );
+          $("#i_rolebox").attr("class", "cardbox role_" + a);
         }
         if (b != that.t_Flag) {
           that.t_Flag = b;
           RoleData.UpdateRole(RoleData.el, b);
           that.el_F5(that);
+          $("#t_rolebox").attr("class", "cardbox role_" + b);
         }
         SkillData.UpdateSkill(SkillData.wlsk, wlsk_num);
         SkillData.UpdateSkill(SkillData.mfsk, mfsk_num);

@@ -28,6 +28,8 @@ img {
 .cardbox {
     overflow: hidden;
     margin: 20px;
+    border: 1px solid #333;
+    width: 550px;
 }
 
 #i_rolebox {
@@ -40,7 +42,6 @@ img {
 
 .cardbox ul li {
     padding-bottom: 3px;
-    background-color: #ace;
     overflow: hidden;
     text-align: left;
     line-height: 28px;
@@ -58,4 +59,20 @@ img {
 .cardbox ul li .cname {
     font-weight: bold;
     color: red;
+}
+
+.role_0 {
+    background: url(../images/0.png) no-repeat;
+}
+
+.role_1 {
+    background: url(../images/1.png) no-repeat;
+}
+
+.role_2 {
+    background: url(../images/2.png) no-repeat;
+}
+
+.role_3 {
+    background: url(../images/3.png) no-repeat;
 }
