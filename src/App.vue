@@ -83,7 +83,7 @@
         </div>
       </div>
     </div>
-
+    <up></up>
     <div id="huang">
       <table>
         <tr>
@@ -214,6 +214,7 @@
 </template>
 
 <script>
+import Up from "./components/up";
 import RoleData from "./js/role";
 import SkillData from "./js/skill";
 
@@ -258,7 +259,7 @@ export default {
       damage_ts0: 1,
     };
   },
-  components: {},
+  components: { Up },
   methods: {
     load_tssk: function () {
       var tssk = SkillData.tssk;
@@ -308,15 +309,26 @@ export default {
         if (that.damage_wuli < 1) that.damage_wuli = 1;
         that.damage_mofa = that.counter[4] - that.counter[1];
         if (that.damage_mofa < 3) that.damage_mofa = 3;
+
         var lssum = 0;
         var ttt = that.i_skill_ts[tssk_num];
         for (var i = 0; i < 3; i++) {
-          lssum += that.counter[2] * ttt[i] - that.counter[0];
+          if (that.counter[2] * ttt[i] - that.counter[0] > 1) {
+            lssum += that.counter[2] * ttt[i] - that.counter[0];
+          } else {
+            lssum += 1;
+          }
         }
         that.damage_ts0 = lssum;
-
-        that.damage_ts1 =
-          that.i_skill_ts[1][0] + that.i_skill_ts[1][1] - that.counter[1] * 2;
+        if (
+          that.i_skill_ts[1][0] + that.i_skill_ts[1][1] - that.counter[1] <
+          6
+        ) {
+          that.damage_ts1 = 6;
+        } else {
+          that.damage_ts1 =
+            that.i_skill_ts[1][0] + that.i_skill_ts[1][1] - that.counter[1] * 2;
+        }
         // window.console.log(that.counter);
       }, 100);
     },
@@ -359,4 +371,5 @@ export default {
 <style>
 @import "./assets/scss/main.scss";
 @import "./assets/scss/check.scss";
+@import "./assets/scss/up.scss";
 </style>
