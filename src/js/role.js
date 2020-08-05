@@ -1,9 +1,9 @@
-var pl = new CreatePlayer(0, 'NULL', 'NULL', 0, 0, 0, 0, 0)
-var el = new CreatePlayer(0, 'NULL', 'NULL', 0, 0, 0, 0, 0)
+var pl = new CreatePlayer(0, 'NULL', 'NULL', 0, 0, 0, 0, 0, 0)
+var el = new CreatePlayer(0, 'NULL', 'NULL', 0, 0, 0, 0, 0, 0)
 import role_data from './data/role.json'
 var RoleData = role_data
 
-function CreatePlayer(uid, cname, ename, hp, atk, def, adf, spd) {
+function CreatePlayer(uid, cname, ename, hp, atk, def, mag, adf, spd) {
     this.UID = uid
     this.cname = cname
     this.ename = ename
@@ -11,6 +11,7 @@ function CreatePlayer(uid, cname, ename, hp, atk, def, adf, spd) {
     this.HP = hp
     this.ATK = atk
     this.DEF = def
+    this.MAG = mag
     this.ADF = adf
     this.SPD = spd
 }

@@ -1,53 +1,53 @@
 [{
         "UID": 0,
         "cname": "天策",
-        "ename":"TC",
-
-        "HP": 100,
-        "ATK": 40,
-        "DEF": 20,
-        "ADF": 25,
+        "ename": "TC",
+        "HP": 150,
+        "ATK": 50,
+        "DEF": 15,
+        "MAG": 10,
+        "ADF": 20,
         "SPD": 10
     },
     {
         "UID": 1,
         "cname": "龙宫",
-        "ename":"LG",
-
-        "HP": 120,
-        "ATK": 15,
-        "DEF": 20,
-        "ADF": 40,
-        "SPD": 5
-    },{
-        "UID": 2,
-        "cname": "方寸",
-        "ename":"FC",
-
-        "HP": 150,
+        "ename": "LG",
+        "HP": 160,
         "ATK": 10,
         "DEF": 15,
-        "ADF": 10,
-        "SPD": 20
-    },{
-        "UID": 3,
-        "cname": "佛门",
-        "ename":"FM",
-
+        "MAG": 50,
+        "ADF": 30,
+        "SPD": 5
+    }, {
+        "UID": 2,
+        "cname": "方寸",
+        "ename": "FC",
         "HP": 180,
         "ATK": 10,
         "DEF": 20,
-        "ADF": 10,
+        "MAG": 10,
+        "ADF": 15,
+        "SPD": 20
+    }, {
+        "UID": 3,
+        "cname": "佛门",
+        "ename": "FM",
+        "HP": 200,
+        "ATK": 10,
+        "DEF": 25,
+        "MAG": 10,
+        "ADF": 15,
         "SPD": 15
-    },{
+    }, {
         "UID": 4,
-        "cname": "攻宠",
-        "ename":"GJBB",
-
-        "HP": 100,
-        "ATK": 30,
-        "DEF": 10,
-        "ADF": 20,
-        "SPD": 8
+        "cname": "自定义",
+        "ename": "ZDY",
+        "HP": 9999,
+        "ATK": 0,
+        "DEF": 0,
+        "MAG": 0,
+        "ADF": 0,
+        "SPD": 10
     }
 ]
