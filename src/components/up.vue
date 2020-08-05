@@ -2,23 +2,23 @@
   <div id="up">
     <table>
       <tr>
-        <th id="ys1">
+        <th class="ys1">
           蓝色：
           <input type="number" v-model="lvbox[0]" />
         </th>
-        <th id="ys2">
+        <th class="ys2">
           橙色：
           <input type="number" v-model="lvbox[1]" />
         </th>
-        <th id="ys3">
+        <th class="ys3">
           紫色：
           <input type="number" v-model="lvbox[2]" />
         </th>
-        <th id="ys4">
+        <th class="ys4">
           红色：
           <input type="number" v-model="lvbox[3]" />
         </th>
-        <th id="ys5">
+        <th class="ys5">
           白金：
           <input type="number" v-model="lvbox[4]" />
         </th>
@@ -83,7 +83,7 @@
       </tr>
       <tr>
         <td>天策</td>
-        <td>{{chenghao[0]}}</td>
+        <td class="ysbg ys0">{{chenghao[0]}}</td>
         <td>
           分配：
           <input type="number" v-model="exp_num[0]" />
@@ -97,7 +97,7 @@
       </tr>
       <tr>
         <td>龙宫</td>
-        <td>{{chenghao[1]}}</td>
+        <td class="ysbg ys0">{{chenghao[1]}}</td>
         <td>
           分配：
           <input type="number" v-model="exp_num[1]" />
@@ -111,7 +111,7 @@
       </tr>
       <tr>
         <td>方寸</td>
-        <td>{{chenghao[2]}}</td>
+        <td class="ysbg ys0">{{chenghao[2]}}</td>
         <td>
           分配：
           <input type="number" v-model="exp_num[2]" />
@@ -125,7 +125,7 @@
       </tr>
       <tr>
         <td>佛门</td>
-        <td>{{chenghao[3]}}</td>
+        <td class="ysbg ys0">{{chenghao[3]}}</td>
         <td>
           分配：
           <input type="number" v-model="exp_num[3]" />
@@ -177,18 +177,25 @@ export default {
         for (var index in that.exp_sum) {
           that.exp_sum[index] =
             parseFloat(that.exp_num[index]) + parseFloat(that.exp_day);
+          var ysbg = $($(".ysbg")[index]);
           if (that.exp_sum[index] >= that.lvbox[4]) {
             that.$set(that.chenghao, index, "白金");
+            ysbg.attr("class", "ysbg ys5");
           } else if (that.exp_sum[index] >= that.lvbox[3]) {
             that.$set(that.chenghao, index, "红");
+            ysbg.attr("class", "ysbg ys4");
           } else if (that.exp_sum[index] >= that.lvbox[2]) {
-            that.$set(that.chenghao, index, "橙");
-          } else if (that.exp_sum[index] >= that.lvbox[1]) {
             that.$set(that.chenghao, index, "紫");
+            ysbg.attr("class", "ysbg ys3");
+          } else if (that.exp_sum[index] >= that.lvbox[1]) {
+            that.$set(that.chenghao, index, "橙");
+            ysbg.attr("class", "ysbg ys2");
           } else if (that.exp_sum[index] >= that.lvbox[0]) {
             that.$set(that.chenghao, index, "蓝");
+            ysbg.attr("class", "ysbg ys1");
           } else {
             that.$set(that.chenghao, index, "绿");
+            ysbg.attr("class", "ysbg ys0");
           }
         }
         that.exp_fenpei =
