@@ -7,11 +7,11 @@
           <input type="number" v-model="lvbox[0]" />
         </th>
         <th id="ys2">
-          紫色：
+          橙色：
           <input type="number" v-model="lvbox[1]" />
         </th>
         <th id="ys3">
-          橙色：
+          紫色：
           <input type="number" v-model="lvbox[2]" />
         </th>
         <th id="ys4">
@@ -49,7 +49,7 @@
         </th>
       </tr>
       <tr>
-        <td colspan="2">
+        <td colspan="2" rowspan="2">
           每天通关金币可转换经验：
           <input type="number" v-model="exp_tongguan" />
         </td>
@@ -57,7 +57,7 @@
           每天可分配经验：
           <span id="exp_fenpei">{{exp_fenpei_sum}}</span>
         </td>
-        <td>
+        <td rowspan="2">
           <div>
             技能+1消耗:
             <b>30</b>
@@ -71,9 +71,13 @@
         </td>
       </tr>
       <tr>
+        <td>总共已分配：{{exp_fenpei}}</td>
+        <td>剩余：{{exp_fenpei_sum - exp_fenpei}}</td>
+      </tr>
+      <tr>
         <th>角色</th>
         <th>品质</th>
-        <th>人物经验 （总共已分配：{{exp_fenpei}}）</th>
+        <th>人物经验</th>
         <th>技能经验</th>
         <th>人物总经验</th>
       </tr>
@@ -145,7 +149,7 @@ export default {
       day: 1,
       exp_shangzhen: 1,
       exp_tongguan: 10,
-      exp_tongguan_vip: 1,
+      exp_tongguan_vip: 1.5,
       exp_fenpei_sum: 0,
       exp_fenpei: 0,
       exp_day: 0,
@@ -155,7 +159,7 @@ export default {
       list: [{ value: true }, { value: false }],
       exp_sum: [0, 0, 0, 0],
       chenghao: ["绿", "绿", "绿", "绿"],
-      lvbox: [1, 3, 12, 60, 360],
+      lvbox: [2, 6, 18, 60, 360],
     };
   },
   methods: {
@@ -166,13 +170,13 @@ export default {
         if (that.checkedValue == true) {
           that.exp_fenpei_sum =
             that.day *
-            (parseInt(that.exp_tongguan) + parseInt(that.exp_tongguan_vip));
+            (parseFloat(that.exp_tongguan) + parseFloat(that.exp_tongguan_vip));
         } else {
           that.exp_fenpei_sum = that.day * that.exp_tongguan;
         }
         for (var index in that.exp_sum) {
           that.exp_sum[index] =
-            parseInt(that.exp_num[index]) + parseInt(that.exp_day);
+            parseFloat(that.exp_num[index]) + parseFloat(that.exp_day);
           if (that.exp_sum[index] >= that.lvbox[4]) {
             that.$set(that.chenghao, index, "白金");
           } else if (that.exp_sum[index] >= that.lvbox[3]) {
@@ -188,14 +192,14 @@ export default {
           }
         }
         that.exp_fenpei =
-          parseInt(that.exp_num[0]) +
-          parseInt(that.exp_sk_num[0]) +
-          parseInt(that.exp_num[1]) +
-          parseInt(that.exp_sk_num[1]) +
-          parseInt(that.exp_num[2]) +
-          parseInt(that.exp_sk_num[2]) +
-          parseInt(that.exp_num[3]) +
-          parseInt(that.exp_sk_num[3]);
+          parseFloat(that.exp_num[0]) +
+          parseFloat(that.exp_sk_num[0]) +
+          parseFloat(that.exp_num[1]) +
+          parseFloat(that.exp_sk_num[1]) +
+          parseFloat(that.exp_num[2]) +
+          parseFloat(that.exp_sk_num[2]) +
+          parseFloat(that.exp_num[3]) +
+          parseFloat(that.exp_sk_num[3]);
       }, 100);
     },
   },
