@@ -5,11 +5,20 @@
         <h1>
           当前角色
           <select id="select_i_role">
-            <option value="0">天策</option>
-            <option value="1">龙宫</option>
-            <option value="2">方寸</option>
-            <option value="3">佛门</option>
-            <option value="4">自定义</option>
+            <option value="0">自定义</option>
+            <option value="1">天策</option>
+            <option value="2">龙宫</option>
+            <option value="3">方寸</option>
+            <option value="4">佛门</option>
+            <option value="5">万兽</option>
+            <option value="6">魔王</option>
+            <option value="7">普陀</option>
+            <option value="8">盘丝</option>
+            <option value="9">熊小竹</option>
+            <option value="10">金刚狼</option>
+            <option value="11">蛟龙</option>
+            <option value="12">蝴蝶仙子</option>
+            <option value="13">蛮熊</option>
           </select>
         </h1>
 
@@ -50,11 +59,20 @@
         <h1>
           目标角色
           <select id="select_t_role">
-            <option value="0">天策</option>
-            <option value="1">龙宫</option>
-            <option value="2">方寸</option>
-            <option value="3">佛门</option>
-            <option value="4">自定义</option>
+            <option value="0">自定义</option>
+            <option value="1">天策</option>
+            <option value="2">龙宫</option>
+            <option value="3">方寸</option>
+            <option value="4">佛门</option>
+            <option value="5">万兽</option>
+            <option value="6">魔王</option>
+            <option value="7">普陀</option>
+            <option value="8">盘丝</option>
+            <option value="9">熊小竹</option>
+            <option value="10">金刚狼</option>
+            <option value="11">蛟龙</option>
+            <option value="12">蝴蝶仙子</option>
+            <option value="13">蛮熊</option>
           </select>
         </h1>
         <div id="role">
@@ -91,7 +109,28 @@
         </div>
       </div>
     </div>
-    <h2>伤害计算公式：(atk*k)-def</h2>
+    <div id="yao">
+      <div>
+        <button @click="rdnumber()">封印判定</button>
+        <h2>{{randomnumber_show}}:{{is_fengyin}}</h2>
+        <br />封印成功率：
+        <input type="number" v-model="randomnumber" />%
+      </div>
+      <div>
+        <button @click="rdnumber1()">速度相同判定</button>
+        <h2>速度优先级：{{randomnumber1_show}}</h2>
+      </div>
+      <div>
+        <button @click="rdnumber2()">群体技能随机目标判定</button>
+        <h2>额外目标： {{random_qt[0]}} {{random_qt[1]}} {{random_qt[2]}}</h2>
+        <br />目标序列号：
+        <input type="number" v-model="troleid_qt" />（1/2/3/4）
+        <br />群体目标数量：
+        <input type="number" v-model="randomnumber_qt" />
+        个（疾风骤雨填3）
+      </div>
+    </div>
+
     <div id="huang">
       <table>
         <tr>
@@ -216,6 +255,13 @@ export default {
   name: "App",
   data: function () {
     return {
+      randomnumber: 70,
+      randomnumber_show: 0,
+      randomnumber1_show: 0,
+      troleid_qt: 1,
+      randomnumber_qt: 1,
+      random_qt: [null, null, null],
+      is_fengyin: "封印未命中",
       i_roledata: [
         RoleData.pl.cname,
         RoleData.pl.HP,
@@ -252,6 +298,34 @@ export default {
   },
   components: { Up },
   methods: {
+    rdnumber: function () {
+      var that = this;
+      that.randomnumber_show = Math.floor(Math.random() * 100);
+      if (that.randomnumber_show < that.randomnumber) {
+        that.is_fengyin = "封印命中";
+      } else {
+        that.is_fengyin = "封印未命中";
+      }
+    },
+    rdnumber1: function () {
+      var that = this;
+      that.randomnumber1_show = Math.floor(Math.random() * 100);
+    },
+    rdnumber2: function () {
+      var that = this;
+      var x = that.troleid_qt;
+      var number = that.randomnumber_qt - 1;
+      var arr = [];
+      while (arr.length < number) {
+        var t = Math.floor(Math.random() * 4) + 1;
+        if (t != x) {
+          if (arr.indexOf(t) == -1) {
+            arr.push(t);
+          }
+        }
+      }
+      that.random_qt = arr;
+    },
     check_1: function () {
       var that = this;
       setInterval(function () {

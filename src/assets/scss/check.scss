@@ -22,3 +22,33 @@
     width: 20px;
     background-color: #fff;
 }
+
+#yao {
+    width: 1000px;
+    margin: 10px auto;
+    border: 2px solid red;
+    overflow: hidden;
+}
+
+#yao button {
+    width: 100px;
+    height: 60px;
+}
+
+#yao h2 {
+    display: inline-block;
+    color: red;
+}
+
+#yao div {
+    float: left;
+    margin-right: 50px;
+}
+
+#yao div:last-child {
+    margin-right: 0;
+}
+
+#yao input {
+    width: 50px !important;
+}
